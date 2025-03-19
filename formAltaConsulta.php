@@ -1,3 +1,6 @@
+<head>
+<link rel="stylesheet" href="diseño/formulario.css"/>
+</head>
 <form name="formAltaConsulta" method="POST" action="altaConsulta.php">
     <label> pregunta </label>
         <input type="text" name="pregunta" class=""/><br/>
@@ -11,6 +14,7 @@
             <option value="Seguridad">Seguridad</option>
         </select>
         <input type="sumbit" value="aceptar" />
+</form>
 
         
 
