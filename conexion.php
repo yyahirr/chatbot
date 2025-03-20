@@ -2,8 +2,8 @@
 // Definir constantes para la conexión a la base de datos
 define("SERVIDOR", "localhost"); // Dirección del servidor MySQL (localhost en este caso)
 define("USUARIO", "root"); // Nombre de usuario de la base de datos
-define("PASSWORD", "clave"); // Contraseña del usuario de la base de datos
-define("DB", "nombre_base_de_datos"); // Nombre de la base de datos a la que se conectará
+define("PASSWORD", ""); // Contraseña del usuario de la base de datos
+define("DB", "chatbot"); // Nombre de la base de datos a la que se conectará
 
 try {
     // Crear una nueva conexión PDO a la base de datos MySQL

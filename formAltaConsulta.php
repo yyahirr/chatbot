@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/chatbot/diseño/formulario.css"/>
 </head>
 <!--formulario para dar de alta la consulta-->
-<form name="formAltaConsulta" method="POST" action="altaConsulta.php">
+<form name="formAltaConsulta" method="POST" action="AltaConsulta.php">
     <!--etiqueta de pregunta-->
     <label> Pregunta </label>
         <input type="text" name="pregunta" class="pregunta"/><br/>
@@ -11,7 +11,7 @@
         <label> Respuesta </label>
         <input type="text" name="respuesta" class="respuesta"/><br/>
     <!--lista desplegable para seleccionar-->
-        <select name="categoria">
+        <select name="consulta">
     <!--categorias de la lista-->
             <option value="Sistema Operativo">Sistema operativo</option>
             <option value="Software">Software</option>
