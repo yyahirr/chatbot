@@ -1,7 +1,7 @@
 /* Estilos generales */
 body {
     font-family: Arial, sans-serif;
-    background: url('https://i.imgur.com/ZdTjTJU.png') no-repeat center center/cover;
+    background: url('https://i.imgur.com/Z3kVu1P.png') no-repeat center center/cover;
     
     display: flex;
     justify-content: center;
@@ -10,8 +10,18 @@ body {
     margin: 0;
 }
 
+/*
+https://i.imgur.com/ZdTjTJU.png
+https://wallpapercave.com/wp/wp11311898.jpg
+https://i.imgur.com/Bz9BVow.png
+https://i.imgur.com/ZwsMnVu.png
+https://i.imgur.com/Z3kVu1P.png
+*/
+
+
+
 form {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.3);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
