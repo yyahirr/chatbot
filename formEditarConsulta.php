@@ -7,7 +7,12 @@
 include("conexion.php");
 
 // Consulta SQL para seleccionar un registro específico por su ID
-$sql = "SELECT * FROM registro_db WHERE id = (:id);";
+$sql = "SELECT * FROM consulta WHERE id=(:id);";
+$stmt= $pdo->prepare($sql);
+$stmt->execute( ['id' => $_GET['id']]);
+if($consulta = $stmt-> fetchAll(PDO::FETCH_ASSOC) ) {
+
+
 ?>
 
 <!-- Formulario para editar una consulta existente -->
@@ -15,19 +20,15 @@ $sql = "SELECT * FROM registro_db WHERE id = (:id);";
     
     <!-- Campo para el ID (solo lectura) -->
     <label for="id">ID</label>
-    <input type="text" name="id" readonly class="" /> <br/>
+    <input type="text" name="id" value="<?=$consulta['id'];?>" readonly class="" /> <br/>
 
     <!-- Campo para la pregunta -->
     <label for="pregunta">Pregunta</label>
-    <input type="text" name="pregunta" id="pregunta" class="" /> <br/>
+    <input type="text" name="pregunta" value="<?=$consulta['pregunta'];?>"/> <br/>
 
     <!-- Campo para la respuesta -->
     <label for="respuesta">Respuesta</label>
-    <input type="text" name="respuesta" id="respuesta" class="" /> <br/>
-
-    <!-- Campo para la consulta -->
-    <label for="consulta">Consulta</label>
-    <input type="text" name="consulta" id="consulta" class="" /> <br/>
+    <input type="text" name="respuesta" value="<?=$consulta['respuesta'];?>"/> <br/>
 
     <!-- Menú desplegable para seleccionar la categoría -->
     <label for="categoria">Categoría</label>
@@ -42,3 +43,9 @@ $sql = "SELECT * FROM registro_db WHERE id = (:id);";
     <!-- Botón para enviar el formulario -->
     <input type="submit" value="Enviar pregunta"/>
 </form>
+<?php
+}else{
+    echo "el registro seleccionado no existe";
+    echo "<a href='ListarConsultas.php'>Volver</a>";
+}
+?>

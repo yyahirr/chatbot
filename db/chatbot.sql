@@ -24,14 +24,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `registro_db`
+-- Estructura de tabla para la tabla `consulta`
 --
 
-CREATE TABLE `registro_db` (
+CREATE TABLE `consulta` (
   `id` int(11) NOT NULL,
   `pregunta` varchar(500) NOT NULL,
   `respuesta` varchar(500) NOT NULL,
-  `consulta` varchar(100) NOT NULL
+  `consultas` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -39,9 +39,9 @@ CREATE TABLE `registro_db` (
 --
 
 --
--- Indices de la tabla `registro_db`
+-- Indices de la tabla `consulta`
 --
-ALTER TABLE `registro_db`
+ALTER TABLE `consulta`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -49,9 +49,9 @@ ALTER TABLE `registro_db`
 --
 
 --
--- AUTO_INCREMENT de la tabla `registro_db`
+-- AUTO_INCREMENT de la tabla `consulta`
 --
-ALTER TABLE `registro_db`
+ALTER TABLE `consulta`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 

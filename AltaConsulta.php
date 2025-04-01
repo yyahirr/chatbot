@@ -1,13 +1,19 @@
 <?php
 // Incluye el archivo de conexión a la base de datos
 include("conexion.php");
-
-$sql="INSERT INTO registro_db (pregunta, respuesta, consulta) VALUES (:pregunta,:respuesta,:consulta)";
+global $pdo;
+$pdo->exec("USE chatbot");
+$sql="INSERT INTO consulta (pregunta, respuesta, consultas) VALUES (:pregunta,:respuesta,:consultas)";
 $stmt= $pdo->prepare($sql);
-$stmt->execute([
+if($stmt->execute([
     'pregunta'=> $_POST['pregunta'],
     'respuesta'=> $_POST['respuesta'],
-    'consulta'=> $_POST['consulta']
-]); 
+    'consultas'=> $_POST['consultas']
+]) ) {
+    echo "El registro se cargo correctamente";
+}else{
+    echo "El registro no pudo cargarse";
+}
+echo "<br/><a name='V   olver' href='ListarConsultas.php'>Volver</a>"
 
 ?>
