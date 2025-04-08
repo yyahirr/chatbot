@@ -4,13 +4,13 @@
 
 <?php
 // Incluimos el archivo de conexión a la base de datos
-include("conexion.php");
+include('conexion.php');
 
 // Consulta SQL para seleccionar un registro específico por su ID
-$sql = "SELECT * FROM consulta WHERE id=(:id);";
+$sql = 'SELECT * FROM consulta WHERE id=:id';
 $stmt= $pdo->prepare($sql);
 $stmt->execute( ['id' => $_GET['id']]);
-if($consulta = $stmt-> fetchAll(PDO::FETCH_ASSOC) ) {
+if($consulta = $stmt-> fetch(PDO::FETCH_ASSOC) ) {
 
 
 ?>
@@ -19,8 +19,8 @@ if($consulta = $stmt-> fetchAll(PDO::FETCH_ASSOC) ) {
 <form name="formEditarConsulta" method="Post" action="editarConsulta.php" method="POST">
     
     <!-- Campo para el ID (solo lectura) -->
-    <label for="id">ID</label>
-    <input type="text" name="id" value="<?=$consulta['id'];?>" readonly class="" /> <br/>
+    <label for="id">id</label>
+    <input type="text" name="id" value="<?=$consulta['id'];?>"readonly class="" /> <br/>
 
     <!-- Campo para la pregunta -->
     <label for="pregunta">Pregunta</label>
@@ -31,8 +31,8 @@ if($consulta = $stmt-> fetchAll(PDO::FETCH_ASSOC) ) {
     <input type="text" name="respuesta" value="<?=$consulta['respuesta'];?>"/> <br/>
 
     <!-- Menú desplegable para seleccionar la categoría -->
-    <label for="categoria">Categoría</label>
-    <select name="categoria" id="categoria" class="">
+    <label for="consultas">Consultas</label>
+    <select name="consultas" id="consultas" class="">
         <option value="Seguridad">Seguridad</option>
         <option value="Compatibilidad">Conectividad</option>
         <option value="Hardware">Hardware</option>

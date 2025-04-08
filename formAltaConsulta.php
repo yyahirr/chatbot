@@ -11,7 +11,7 @@
         <label> Respuesta </label>
         <input type="text" name="respuesta" class="respuesta"/><br/>
     <!--lista desplegable para seleccionar-->
-        <select name="consulta">
+        <select name="consultas">
     <!--categorias de la lista-->
             <option value="Sistema Operativo">Sistema operativo</option>
             <option value="Software">Software</option>
