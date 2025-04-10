@@ -1,0 +1,10 @@
+h1{
+    color:aqua;
+}
+
+footer{
+    position: relative;
+    font-size: 15px;
+    text-align: center;
+    top: 330px;
+}

@@ -1,6 +1,6 @@
-<!--link del css-->
+<!--link del css--> 
 <head>
-<link rel="stylesheet" href="/chatbot/diseño/formulario.css"/>
+<link rel="stylesheet" href="/chatbot/diseño/diseñoAltaConsulta.css"/>
 </head>
 <!--formulario para dar de alta la consulta-->
 <form name="formAltaConsulta" method="POST" action="AltaConsulta.php">
