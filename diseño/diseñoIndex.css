@@ -1,5 +1,8 @@
-h1{
-    color:aqua;
+
+body{
+    background-image: url(https://preview.redd.it/672ye1wud3r51.png?width=1080&crop=smart&auto=webp&s=5cdbf468901a92a00216c9208fbc788d1be057fb);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 footer{
@@ -7,4 +10,67 @@ footer{
     font-size: 15px;
     text-align: center;
     top: 330px;
+    font-family: 'Poppins', sans-serif;
+}
+
+header h1{
+    font-size: 50px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+div nav .texto1{
+    color: white;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+div nav .texto1:hover{
+    color: aqua;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+div nav .texto2{
+    color: white;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+div nav .texto2:hover{
+    color: aqua;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+div nav .texto3{
+    color: white;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+div nav .texto3:hover{
+    color: aqua;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+footer{
+    position: relative;
+    text-align: center;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    bottom: 0;
+}
+
+header{
+    position: relative;
+    height: 70px;
+    width: 100%;
+    top: -20px;
 }
