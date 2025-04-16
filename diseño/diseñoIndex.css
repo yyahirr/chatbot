@@ -5,72 +5,57 @@ body{
     background-repeat: no-repeat;
 }
 
-footer{
-    position: relative;
-    font-size: 15px;
-    text-align: center;
-    top: 330px;
-    font-family: 'Poppins', sans-serif;
-}
-
-header h1{
-    font-size: 50px;
-    text-align: center;
-    color: rgb(0, 0, 0);
-    margin-top: 20px;
-    font-family: 'Poppins', sans-serif;
-}
-
-div nav .texto1{
-    color: white;
-    font-size: 20px;
-    font-family: 'Poppins', sans-serif;
-    text-align: center;
-}
-
-div nav .texto1:hover{
-    color: aqua;
-    font-size: 20px;
-    font-family: 'Poppins', sans-serif;
-}
-
-div nav .texto2{
-    color: white;
-    font-size: 20px;
-    font-family: 'Poppins', sans-serif;
-}
-
-div nav .texto2:hover{
-    color: aqua;
-    font-size: 20px;
-    font-family: 'Poppins', sans-serif;
-}
-
-div nav .texto3{
-    color: white;
-    font-size: 20px;
-    font-family: 'Poppins', sans-serif;
-}
-
-div nav .texto3:hover{
-    color: aqua;
-    font-size: 20px;
-    font-family: 'Poppins', sans-serif;
-}
-
-footer{
-    position: relative;
-    text-align: center;
-    width: 100%;
-    color: white;
-    font-size: 20px;
-    font-family: 'Poppins', sans-serif;
-    bottom: 0;
-}
-
 header{
     position: relative;
     height: 70px;
     width: 100%;
     top: -20px;
 }
+
+header h1{
+    background-color: white;
+    font-size: 50px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
+    height: 150px;
+}
+
+div nav{
+    position: absolute;
+    top: 12%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); /* ajustar el centro */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 130px;
+}
+
+div nav .texto1,
+div nav .texto2,
+div nav .texto3 {
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+    font-family: 'Poppins', sans-serif;
+}
+
+div nav .texto1:hover,
+div nav .texto2:hover,
+div nav .texto3:hover {
+    color: aqua;
+}
+
+footer{
+    position: relative;
+    text-align: center;
+    width: 100%;
+    color: white;
+    font-size: 25px;
+    font-family: 'Poppins', sans-serif;
+    bottom: 0;
+    top: 330px;
+}
+
