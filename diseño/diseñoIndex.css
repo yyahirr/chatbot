@@ -59,3 +59,94 @@ footer{
     top: 330px;
 }
 
+/* Diseño para el chatbot */
+.wrapper {
+    width: 400px;
+    margin: 50px auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+    padding: 20px;
+}
+
+.wrapper .title {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    margin-bottom: 20px;
+}
+
+.wrapper .form {
+    margin-bottom: 20px;
+}
+
+.wrapper .bot-inbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.wrapper .bot-inbox .icon {
+    width: 40px;
+    height: 40px;
+    background-image: url("https://i.imgur.com/9qY1EMo.png");
+    background-size: 40px 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.wrapper .bot-inbox .icon i {
+    color: white;
+    font-size: 20px;
+}
+
+.wrapper .bot-inbox .msg-header {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    padding: 10px 15px;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+}
+
+.wrapper .typing-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.wrapper .typing-field .input-data {
+    display: flex;
+    width: 100%;
+}
+
+.wrapper .typing-field .input-data input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+.wrapper .typing-field .input-data button {
+    width: 18%;
+    margin-left: 2%;
+    padding: 10px;
+    background-color: aqua;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.wrapper .typing-field .input-data button:hover {
+    background-color: rgb(0, 162, 255);
+}   
