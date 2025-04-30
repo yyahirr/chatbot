@@ -66,10 +66,26 @@
 
 
 </body>
- <!--<script>
-    $(document).ready(function{}{
-        $("#send-btn").on"click"(function(){
-
+<script>
+    $(document).ready(function() { 
+        $("#send-btn").on("click", function() {
+            $value = $("#data").val(); // toma el valor del input y lo guarda en la variable $valor
+            $msg = '<div class="user-inbox- inbox"><div class="msg-header"><p>' + $value + '</p></div>'; 
+            $(".form").append($msg); // agrega el mensaje del usuario al div con la clase form
+            $("#data").val(''); // limpia el input después de enviar el mensaje
+            // Iniciamos el código Ajax
+            $.ajax({ // hacemos la llamada ajax
+                url: "respuesta.php", // archivo al que se le envía la información
+                type: "POST", //tipo de método
+                data: 'text=' + $value, // datos que se envían al archivo respuesta.php
+                success: function(result) { // si la llamada es exitosa
+                    $respuesta = '<div class="user-inbox- inbox"><div class="icon"><i class="fas fa-user"></i>' + '</div><div class="msg-header">' 
+                    + '<p>' + result + '</p> </div> </div>'; // se guarda la respuesta en la variable $respuesta
+                    $(".form").append($respuesta); // se agrega la respuesta al div con la clase form
+                    $(".form").scrollTop($(".form")[0].scrollHeight); // hace scroll hacia abajo para ver el último mensaje
+                } 
+            });
+        }); 
     });
-</script>-->
+</script>
 </html>
