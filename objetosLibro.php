@@ -1,7 +1,7 @@
 <?php
 include ("libroClass.php"); // Incluye la clase Libro
 
-$libro1 = new Libro("1984", "George Orwell", "1949-06-08", "DeBolsillo"); // Instancia de la clase Libro
+$libro1 = new Libro("Rebelion en la granja", "George Orwell", "1945-08-17", "DeBolsillo"); // Instancia de la clase Libro
 
 print "<br>></br>";
 
