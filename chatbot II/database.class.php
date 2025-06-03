@@ -6,22 +6,22 @@ class Database {
     private $usuario="root";
     private $clave= "";
     private $conexion;
-}
 
-public function __construct() {
+    public function __construct() {
 
-}
+    }
 
-public function getConnection(){
+    public function getConnection(){
 
-}
+    }
 
-public function execute (){
+    public function execute (){
 
-}
+    }
 
-public function query(){
+    public function query(){
 
+    }
 }
 
 ?>
