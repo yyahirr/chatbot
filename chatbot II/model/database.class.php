@@ -29,13 +29,6 @@ class Database {
 
     }
 
-    public function execute (){
-        
-    }
-
-    public function query(){
-
-    }
 }
 
 ?>

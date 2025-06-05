@@ -14,13 +14,7 @@ class Rol {
         $this->conexion = Database::getInstance()->getConnection();
     }
 
-    public function guardar() {
-        $sql = "INSERT INTO roles (nombre) VALUES (?)";
-        $stmt = $this->conexion->prepare($sql);
-        return $stmt->execute([$this->nombre]);
-    }
-
-    public function obtenerTodas() {
+    public static function obtenerTodas() {
         $conexion = Database::getInstance()->getConnection();
         $sql = "SELECT * FROM roles";
         $stmt = $this->conexion->prepare($sql);
@@ -28,17 +22,30 @@ class Rol {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function obtenerPorId($id) {
-        // ...
+    public static function obtenerPorId($id) {
+        $conexion = Database::getInstance()->getConnection();
+        $sql = "SELECT * FROM roles WHERE id = ?";
+        $stmt = $conexion->prepare($sql);
+        $stmt->execute([$id]);
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($resultado) {
+            return new Rol($resultado['id'], $resultado['nombre']);
+        } else {
+            return null; // o lanzar una excepción si prefieres
+        }
+    }
+
+    public function guardar() {
+        $sql = "INSERT INTO roles (nombre) VALUES (?)";
+        $stmt = $this->conexion->prepare($sql);
+        return $stmt->execute([$this->nombre]);
     }
 
     public function actualizar($id, $nombre) {
         $sql = "UPDATE roles SET nombre= ? WHERE id = ?";
         $stmt = $this->conexion->prepare($sql);
         return $stmt->execute([$this->nombre, $this->id]);
-    }
-
-
     }
 
     public function eliminar($id) {
