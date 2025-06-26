@@ -9,21 +9,21 @@ class Rol {
     private $conexion;
 
     public function __construct($id=null, $nombre=null) {
-        $this->id=$id;
-        $this->nombre=$nombre;
-        $this->conexion = Database::getInstance()->getConnection();
+        $this->id = $id;
+        $this->nombre = $nombre;
+        $this->conexion = Database::getConnection();
     }
 
     public static function obtenerTodas() {
-        $conexion = Database::getInstance()->getConnection();
+        $conexion = Database::getConnection();
         $sql = "SELECT * FROM roles";
-        $stmt = $this->conexion->prepare($sql);
+        $stmt = $conexion->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function obtenerPorId($id) {
-        $conexion = Database::getInstance()->getConnection();
+        $conexion = Database::getConnection();
         $sql = "SELECT * FROM roles WHERE id = ?";
         $stmt = $conexion->prepare($sql);
         $stmt->execute([$id]);
@@ -68,7 +68,7 @@ class Rol {
     public function setNombre($nombre) {
         $this->nombre = $nombre;
 }
-
+}
 
 
 ?>

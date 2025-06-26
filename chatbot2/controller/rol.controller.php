@@ -1,6 +1,11 @@
 <?php
 include ("../model/rol.class.php");
 
+
+$operacion = isset($_POST['operacion']) ? $_POST['operacion'] : null;
+
+$result=null;
+
 if ($operacion == "guardar"){
     $rol = new Rol(null, $_POST['nombre']);
     $result=$rol->guardar();
@@ -17,6 +22,6 @@ if ($result) {
 } else {
     print "<br>Error al realizar la operación.</b><br>";
 }
-print "<a href= 'listar.roles.php'>Volver a la lista de roles</a>";
+print "<a href= '../model/listarRol.php'>Volver a la lista de roles</a>";
 
 ?>
