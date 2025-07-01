@@ -9,13 +9,15 @@ class Rol {
     private $conexion;
 
     public function __construct($id=null, $nombre=null) {
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->conexion = Database::getConnection();
+        $this->id = $id; // inicializar el id
+        $this->nombre = $nombre; // inicializar el nombre
+        $this->conexion = Database::getConnection(); // obtener la conexión a la base de datos
     }
+    //en las funciones no estaticas se debe de usar $this->conexion
+    // en las funciones estaticas se debe de usar Database::getConnection()
 
     public static function obtenerTodas() {
-        $conexion = Database::getConnection();
+        $conexion = Database::getConnection(); 
         $sql = "SELECT * FROM roles";
         $stmt = $conexion->prepare($sql);
         $stmt->execute();
@@ -32,11 +34,11 @@ class Rol {
         if ($resultado) {
             return new Rol($resultado['id'], $resultado['nombre']);
         } else {
-            return null; // o lanzar una excepción si prefieres
+            return null; 
         }
     }
 
-    public function guardar() {
+    public function guardar() { 
         $sql = "INSERT INTO roles (nombre) VALUES (?)";
         $stmt = $this->conexion->prepare($sql);
         return $stmt->execute([$this->nombre]);
