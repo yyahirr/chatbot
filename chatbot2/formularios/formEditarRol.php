@@ -1,11 +1,11 @@
 <?php
-include "rol.class.php";
+include "../model/rol.class.php";
 if (isset($_GET['id'])) {
     $rol= Rol::obtenerPorId($_GET['id']);
 ?>
 
 <h2>Editar Rol</h2>
-<form name="formEditarRol" action="./controller/rol.controller.php" method="POST">
+<form name="formEditarRol" action="../controller/rol.controller.php" method="POST">
     <input type="hidden" name="operacion" value="actualizar">
     <label> Id del Rol: </label>
     <input type="text" name="id" value="<?=$rol->getId();?>" readonly/>

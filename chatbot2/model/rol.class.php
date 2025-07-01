@@ -42,16 +42,16 @@ class Rol {
         return $stmt->execute([$this->nombre]);
     }
 
-    public function actualizar($id, $nombre) {
+    public function actualizar() {
         $sql = "UPDATE roles SET nombre= ? WHERE id = ?";
         $stmt = $this->conexion->prepare($sql);
         return $stmt->execute([$this->nombre, $this->id]);
     }
 
-    public function eliminar($id) {
+    public function eliminar() {
         $sql = "DELETE FROM roles WHERE id = ?";
         $stmt = $this->conexion->prepare($sql);
-        return $stmt->execute([$id]);
+        return $stmt->execute([$this->id]);
     }
 
     public function getId() {

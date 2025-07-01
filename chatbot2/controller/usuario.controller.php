@@ -22,5 +22,5 @@ if ($result) {
     print "<br>Error al realizar la operación.</b><br>";
 }
 
-print "<a href='../model/listarUsuario.php'>Volver a la lista de usuarios</a>";
+print "<a href='../formularios/listarUsuario.php'>Volver a la lista de usuarios</a>";
 ?>

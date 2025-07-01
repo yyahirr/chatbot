@@ -14,14 +14,14 @@ if ($operacion == "guardar"){
     $result=$rol->actualizar();
 }else if ($operacion == "eliminar"){
     $rol = new Rol($_POST['id'], null);
-    $result=$rol->eliminar();
-}
+    $result = $rol->eliminar();
+    }
 
 if ($result) {
     print "<br>Operación realizada con éxito.</b><br>";
 } else {
     print "<br>Error al realizar la operación.</b><br>";
 }
-print "<a href= '../model/listarRol.php'>Volver a la lista de roles</a>";
+print "<a href= '../formularios/listarRol.php'>Volver a la lista de roles</a>";
 
 ?>

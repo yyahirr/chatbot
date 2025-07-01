@@ -1,10 +1,9 @@
 <?php
-include "usuario.class.php";
+include "../model/usuario.class.php";
 
 if (isset($_GET['id'])) {
-    // Obtener usuario por ID
-    $usuarios = new Usuarios();
-    $usuario = $usuarios->obtenerPorId($_GET['id']);
+    $usuario = new Usuario();
+    $usuario = $usuario->obtenerPorId($_GET['id']);
     if ($usuario) {
 ?>
 
@@ -19,11 +18,10 @@ if (isset($_GET['id'])) {
     <input type="email" name="email" value="<?=$usuario['email'];?>" required /><br><br>
     <label>Contraseña:</label>
     <input type="password" name="contrasena" value="<?=$usuario['password'];?>" required /><br><br>
-    <!-- Si tienes rol_id, puedes agregarlo aquí -->
-    <!--
+
     <label>Rol:</label>
     <input type="number" name="rol_id" value="<?=$usuario['rol_id'];?>" /><br><br>
-    -->
+
     <input type="submit" value="Aceptar" />
 </form>
 

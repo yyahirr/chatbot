@@ -1,7 +1,7 @@
 <?php
 include_once 'database.class.php';
 
-class Usuarios {
+class Usuario {
     private $id;
     private $nombre;
     private $email;
@@ -23,6 +23,18 @@ class Usuarios {
     $stmt = $this->conexion->prepare($sql);
     return $stmt->execute([$this->nombre, $this->email, $this->password, $this->rol_id]);
 }
+    public function actualizar() {
+        $sql = "UPDATE usuarios SET nombre = ?, email = ?, password = ?, rol_id = ? WHERE id = ?";
+        $stmt = $this->conexion->prepare($sql);
+        return $stmt->execute([$this->nombre, $this->email, $this->password, $this->rol_id, $this->id]);
+    }
+
+    public function eliminar() {
+        $sql = "DELETE FROM usuarios WHERE id = ?";
+        $stmt = $this->conexion->prepare($sql);
+        return $stmt->execute([$this->id]);
+    }
+
 
     public function obtenerTodas() {
         $conexion = Database::getConnection();
@@ -38,7 +50,8 @@ class Usuarios {
         $stmt = $conexion->prepare($sql);
         $stmt->execute([$id]);
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+        return $resultado; 
+}
 
     public function obtenerPorEmail($email) {
         $conexion = Database::getConnection();
@@ -48,14 +61,4 @@ class Usuarios {
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function verificarLogin($email, $password) {
-    $usuario = $this->obtenerPorEmail($email);
-    if ($usuario && $usuario['password'] === $password) {
-        // Login correcto
-        return $usuario;
-    } else {
-        // Login incorrecto
-        return false;
-    }
-}
 }

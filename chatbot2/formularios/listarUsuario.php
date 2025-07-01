@@ -1,6 +1,6 @@
 <?php
 require_once("../model/usuario.class.php");
-$usuariosObj = new Usuarios();
+$usuariosObj = new Usuario();
 $usuarios = $usuariosObj->obtenerTodas();
 ?> <!-- Cierra el bloque PHP aquí -->
 

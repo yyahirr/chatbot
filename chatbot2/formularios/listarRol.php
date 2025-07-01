@@ -24,8 +24,9 @@ $roles = Rol::obtenerTodas(); // metodo estatico, son propios de la clase.
 
 <!-- Botón de Eliminar con formulario POST -->
 <form action="../controller/rol.controller.php" method="POST" style="display:inline;">
-<input type="hidden" name="id" value="<?= $rol['id'] ?>">
-<button type="submit" onclick="return confirm('¿Seguro que querés eliminar este rol?')">Eliminar</button>
+    <input type="hidden" name="id" value="<?= $rol['id'] ?>">
+    <input type="hidden" name="operacion" value="eliminar">
+    <button type="submit" onclick="return confirm('¿Seguro que querés eliminar este rol?')">Eliminar</button>
 </form>
 </td>
 </tr>
