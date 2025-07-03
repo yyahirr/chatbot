@@ -1,7 +1,6 @@
 <?php
 require_once("../model/usuario.class.php");
-$usuariosObj = new Usuario();
-$usuarios = $usuariosObj->obtenerTodas();
+$usuarios = Usuario::obtenerTodas();
 ?> <!-- Cierra el bloque PHP aquí -->
 
 <h2 style="text-align: center;">Listado de Usuarios</h2>

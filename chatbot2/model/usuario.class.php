@@ -36,7 +36,7 @@ class Usuario {
     }
 
 
-    public function obtenerTodas() {
+    public static function obtenerTodas() {
         $conexion = Database::getConnection();
         $sql = "SELECT * FROM usuarios";
         $stmt = $conexion->prepare($sql);
@@ -44,7 +44,7 @@ class Usuario {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function obtenerPorId($id) {
+    public static function obtenerPorId($id) {
         $conexion = Database::getConnection();
         $sql = "SELECT * FROM usuarios WHERE id = ?";
         $stmt = $conexion->prepare($sql);
