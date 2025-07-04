@@ -1,9 +1,7 @@
 <?php
 include ("../model/rol.class.php");
 
-
 $operacion = isset($_POST['operacion']) ? $_POST['operacion'] : null;
-
 $result=null;
 
 if ($operacion == "guardar"){

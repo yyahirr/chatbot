@@ -1,7 +1,7 @@
 <?php
 require_once("../model/usuario.class.php");
 $usuarios = Usuario::obtenerTodas();
-?> <!-- Cierra el bloque PHP aquí -->
+?>
 
 <h2 style="text-align: center;">Listado de Usuarios</h2>
 <div style="text-align: center; margin-bottom: 10px;">
