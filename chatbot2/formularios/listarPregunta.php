@@ -20,10 +20,9 @@ $preguntas = Preguntas::obtenerTodas();
     <td><?= $pregunta['pregunta'] ?></td>
     <td><?= $pregunta['categoria_id'] ?></td>
     <td>
-        <!-- Botón de Editar -->
+
         <a href="formEditarPregunta.php?id=<?= $pregunta['id'] ?>">Editar</a>
 
-        <!-- Botón de Eliminar con formulario POST -->
         <form action="../controller/pregunta.controller.php" method="POST" style="display:inline;">
             <input type="hidden" name="id" value="<?= $pregunta['id'] ?>">
             <input type="hidden" name="operacion" value="eliminar">
