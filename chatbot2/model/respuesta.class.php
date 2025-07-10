@@ -16,18 +16,16 @@ class Respuesta {
 
 
     public static function obtenerTodas() {
-        $conexion = Database::GetConnection();
         $sql = "SELECT * from respuesta";
-        $stmt = $conexion->prepare($sql);
+        $stmt = Database::GetConnection()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function obtenerPorId($id) {
-        $conexion = Database::GetConnection();
-        $sql = "SELECT * from respuesta WHERE id = ?";
-        $stmt = $conexion->prepare($sql);
-        $stmt->execute();
+        $sql = "SELECT * FROM respuesta WHERE id = ?";
+        $stmt = Database::GetConnection()->prepare($sql);
+        $stmt->execute([$id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function guardar() {

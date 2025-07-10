@@ -20,8 +20,7 @@ class Categoria {
 
     public static function obtenerTodas() {
         $sql = "SELECT * FROM categoria";
-        $conexion = Database::getConnection();
-        $stmt = $conexion->prepare($sql);
+        $stmt = Database::getConnection()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

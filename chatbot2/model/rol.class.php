@@ -17,25 +17,22 @@ class Rol {
     // en las funciones estaticas se debe de usar Database::getConnection()
 
     public static function obtenerTodas() {
-        $conexion = Database::getConnection(); 
         $sql = "SELECT * FROM roles";
-        $stmt = $conexion->prepare($sql);
+        $stmt = Database::getConnection()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     }
 
     public static function obtenerPorId($id) {
-        $conexion = Database::getConnection();
         $sql = "SELECT * FROM roles WHERE id = ?";
-        $stmt = $conexion->prepare($sql);
+        $stmt = Database::getConnection()->prepare($sql);
         $stmt->execute([$id]);
-        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        if ($resultado) {
-            return new Rol($resultado['id'], $resultado['nombre']);
-        } else {
-            return null; 
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            return new Rol($row['id'], $row['nombre']);
         }
+            return null;
     }
 
     public function guardar() { 

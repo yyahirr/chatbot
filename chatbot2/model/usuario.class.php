@@ -37,28 +37,24 @@ class Usuario {
 
 
     public static function obtenerTodas() {
-        $conexion = Database::getConnection();
         $sql = "SELECT * FROM usuarios";
-        $stmt = $conexion->prepare($sql);
+        $stmt = Database::getConnection()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function obtenerPorId($id) {
-        $conexion = Database::getConnection();
         $sql = "SELECT * FROM usuarios WHERE id = ?";
-        $stmt = $conexion->prepare($sql);
+        $stmt = Database::getConnection()->prepare($sql);
         $stmt->execute([$id]);
-        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $resultado; 
+        return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
     public function obtenerPorEmail($email) {
-        $conexion = Database::getConnection();
         $sql = "SELECT * FROM usuarios WHERE email = ?";
-        $stmt = $conexion->prepare($sql);
+        $stmt = Database::getConnection()->prepare($sql);
         $stmt->execute([$id]);
-        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
 }

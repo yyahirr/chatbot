@@ -2,7 +2,6 @@
 include "../model/respuesta.class.php";
 if (isset($_GET['id'])) {
     $respuesta = Respuesta::obtenerPorId($_GET['id']);
-    if ($respuesta) {
 ?>
 
 <h2>Editar Respuesta</h2>
@@ -22,7 +21,4 @@ if (isset($_GET['id'])) {
     } else {
         print "El ID ingresado no es válido";
     }
-} else {
-    print "No se recibió un ID";
-}
 ?>
