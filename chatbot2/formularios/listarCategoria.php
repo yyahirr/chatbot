@@ -3,8 +3,8 @@ require_once("../model/categoria.class.php");
 $categorias = Categoria::obtenerTodas();
 ?>
 
-<h2 style="text-align: center;">Listado de Categorías</h2>
-<div style="text-align: center; margin-bottom: 10px;">
+<h2>Listado de Categorías</h2>
+<div>
     <a href="formAltaCategoria.php">+ Nueva Categoría</a>
 </div>
 <table>

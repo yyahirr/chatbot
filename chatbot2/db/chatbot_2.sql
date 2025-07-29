@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2025 a las 23:50:08
+-- Tiempo de generación: 29-07-2025 a las 23:59:40
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -32,6 +32,17 @@ CREATE TABLE `categoria` (
   `nombre` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `nombre`) VALUES
+(1, 'Sistemas Operativos'),
+(2, 'Conectividad'),
+(3, 'Hardware'),
+(4, 'Software'),
+(5, 'Seguridad');
+
 -- --------------------------------------------------------
 
 --
@@ -57,6 +68,17 @@ CREATE TABLE `preguntas` (
   `categoria_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `preguntas`
+--
+
+INSERT INTO `preguntas` (`id`, `pregunta`, `categoria_id`) VALUES
+(1, '¿Cuál es la función principal de un sistema operativo?', 1),
+(2, '¿Qué dispositivo se utiliza para conectar varias computadoras en una red local?', 2),
+(3, '¿Qué componente se encarga de procesar la información en una computadora?', 3),
+(4, '¿Qué tipo de software es Microsoft Word?', 4),
+(5, '¿Qué es un antivirus?', 5);
+
 -- --------------------------------------------------------
 
 --
@@ -68,6 +90,17 @@ CREATE TABLE `respuesta` (
   `respuesta` varchar(500) NOT NULL,
   `pregunta_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `respuesta`
+--
+
+INSERT INTO `respuesta` (`id`, `respuesta`, `pregunta_id`) VALUES
+(1, 'Administrar los recursos del hardware y permitir que el usuario interactúe con la computadora.', 1),
+(2, 'El switch.', 2),
+(3, 'El procesador o CPU.', 3),
+(4, 'Es un software de aplicación', 4),
+(5, 'Es un programa que detecta y elimina software malicioso en tu sistema.', 5);
 
 -- --------------------------------------------------------
 
@@ -145,7 +178,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `conversaciones`
@@ -157,13 +190,13 @@ ALTER TABLE `conversaciones`
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
