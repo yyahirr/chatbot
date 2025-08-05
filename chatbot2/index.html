@@ -3,9 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="http://localhost/chatbot/chatbot2/css/diseñoIndex.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <title>Gastón Chatbot</title>
 </head>
 <body>
+    <header>
+        <h1>Chatbot - Gastón</h1>
+        <div>
+            <nav>
+                <a href="menuGestion.html">Gestión General</a>
+                <span class="texto2">Chatbot</span>
+            </nav>
+        </div>
+    </header>
 
+    <main>
+        <div class="wrapper">
+            <div class="title">Chatea con Gastón</div>
+            <div class="form">
+                <div class="bot-inbox inbox">
+                    <div class="icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="msg-header">
+                        <p>Hola, soy Gastón, ¿cómo puedo ayudarte?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="typing-field">
+                <div class="input-data">
+                    <input id="data" type="text" placeholder="Escribe algo aquí.." required>
+                    <button id="send-btn">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+
+    <script>
+        $(document).ready(function() { 
+            $("#send-btn").on("click", function() {
+                $value = $("#data").val(); // toma el valor del input y lo guarda en la variable $valor
+                $msg = '<div class="user-inbox- inbox"><div class="msg-header"><p>' + $value + '</p></div>'; 
+                $(".form").append($msg); // agrega el mensaje del usuario al div con la clase form
+                $("#data").val(''); // limpia el input después de enviar el mensaje
+                // Iniciamos el código Ajax
+                $.ajax({ // hacemos la llamada ajax
+                    url: "controller.php", // archivo al que se le envía la información
+                    type: "POST", //tipo de método
+                    data: 'text=' + $value, // datos que se envían al archivo respuesta.php
+                    success: function(result) { // si la llamada es exitosa
+                        $respuesta = '<div class="user-inbox- inbox"><div class="icon"><i class="fas fa-user"></i>' + '</div><div class="msg-header">' 
+                        + '<p>' + result + '</p> </div> </div>'; // se guarda la respuesta en la variable $respuesta
+                        $(".form").append($respuesta); // se agrega la respuesta al div con la clase form
+                        $(".form").scrollTop($(".form")[0].scrollHeight); // hace scroll hacia abajo para ver el último mensaje
+                    } 
+                });
+            }); 
+        });
+    </script>
 </body>
-</html>

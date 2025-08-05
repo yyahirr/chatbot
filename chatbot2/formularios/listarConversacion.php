@@ -20,5 +20,5 @@ $conversaciones = Conversaciones::obtenerTodas();
     <td><?= $conversacion['id'] ?></td>
     <td><?= $conversacion['pregunta_usuario'] ?></td>
     <td><?= $conversacion['respuesta_bot'] ?></td>
-    <td><?= $conversacion['fecha'] ?></td>
+    <td><?= $conversacion['fecha_hora'] ?></td>
 <?php } ?>
