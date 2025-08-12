@@ -12,7 +12,7 @@ if ($operacion == "guardar"){
     $result=$rol->actualizar();
 }else if ($operacion == "eliminar"){
     $rol = new Rol($_POST['id'], null);
-    $result = $rol->eliminar();
+    $result = $rol->eliminar($_POST['id']);
     }
 
 if ($result) {

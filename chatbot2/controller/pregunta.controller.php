@@ -12,7 +12,7 @@ if ($operacion == "guardar") {
     $result = $pregunta->actualizar();
 } elseif ($operacion == "eliminar") {
     $pregunta = new Preguntas($_POST['id'], null, null);
-    $result = $pregunta->eliminar();
+    $result = $pregunta->eliminar($_POST['id']);
 }
 
 if ($result) {

@@ -13,7 +13,7 @@ if ($operacion == "guardar") {
     $result = $usuario->actualizar();
 } else if ($operacion == "eliminar") {
     $usuario = new Usuario($_POST['id'], null, null, null);
-    $result = $usuario->eliminar();
+    $result = $usuario->eliminar($_POST['id']);
 }
 
 if ($result) {

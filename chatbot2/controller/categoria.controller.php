@@ -12,7 +12,7 @@ if ($operacion == "guardar") {
     $result = $categoria->actualizar();
 } elseif ($operacion == "eliminar") {
     $categoria = new Categoria($_POST['id'], null);
-    $result = $categoria->eliminar();
+    $result = $categoria->eliminar($_POST['id']);
 }
 
 

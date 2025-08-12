@@ -1,13 +1,12 @@
 <?php
 include_once 'database.class.php';
+include_once 'rol.class.php';
 
 class Usuario {
     private $id;
     private $nombre;
     private $email;
     private $password;
-    private $rol_id;
-    private $conexion;
 
     public function __construct($id=null, $nombre=null, $email=null, $password=null, $rol_id=null) {
         $this->id = $id;
@@ -34,8 +33,6 @@ class Usuario {
         $stmt = $this->conexion->prepare($sql);
         return $stmt->execute([$this->id]);
     }
-
-
     public static function obtenerTodas() {
         $sql = "SELECT * FROM usuarios";
         $stmt = Database::getConnection()->prepare($sql);
@@ -43,13 +40,12 @@ class Usuario {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function obtenerPorId($id) {
+    public static function obtenerPorId($id){
         $sql = "SELECT * FROM usuarios WHERE id = ?";
         $stmt = Database::getConnection()->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
     public function obtenerPorEmail($email) {
         $sql = "SELECT * FROM usuarios WHERE email = ?";
         $stmt = Database::getConnection()->prepare($sql);
