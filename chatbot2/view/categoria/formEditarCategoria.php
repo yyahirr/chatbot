@@ -1,5 +1,5 @@
 <?php
-include "../model/categoria.class.php";
+include "../../model/categoria.class.php";
 if (isset($_GET['id'])) {
     $categoria = Categoria::obtenerPorId($_GET['id']);
     if ($categoria) {
@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
 </form>
 
 <?php
-        echo "<a href='./listarCategoria.php'>Volver</a>";
+        echo "<a href='listarCategoria.php'>Volver</a>";
     } else {
         print "El ID ingresado no es válido";
     }
