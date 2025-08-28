@@ -1,5 +1,5 @@
 <?php
-require_once("../model/respuesta.class.php");
+require_once("../../model/respuesta.class.php");
 $respuestas = Respuesta::obtenerTodas();
 ?>
 
@@ -24,7 +24,7 @@ $respuestas = Respuesta::obtenerTodas();
         <a href="formEditarRespuesta.php?id=<?= $respuesta['id'] ?>">Editar</a>
 
         <!-- Botón de Eliminar con formulario POST -->
-        <form action="../controller/respuesta.controller.php" method="POST" style="display:inline;">
+        <form action="../../controller/respuesta.controller.php" method="POST" style="display:inline;">
             <input type="hidden" name="id" value="<?= $respuesta['id'] ?>">
             <input type="hidden" name="operacion" value="eliminar">
             <button type="submit" onclick="return confirm('¿Seguro que querés eliminar esta respuesta?')">Eliminar</button>

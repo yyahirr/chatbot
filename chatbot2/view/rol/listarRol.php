@@ -1,5 +1,5 @@
 <?php
-require_once("../model/rol.class.php");
+require_once("../../model/rol.class.php");
 $roles = Rol::obtenerTodas(); // metodo estatico, son propios de la clase.
 
 ?>
@@ -23,7 +23,7 @@ $roles = Rol::obtenerTodas(); // metodo estatico, son propios de la clase.
 <a href="formEditarRol.php?id=<?= $rol['id'] ?>">Editar</a>
 
 <!-- Botón de Eliminar con formulario POST -->
-<form action="../controller/rol.controller.php" method="POST" style="display:inline;">
+<form action="../../controller/rol.controller.php" method="POST" style="display:inline;">
     <input type="hidden" name="id" value="<?= $rol['id'] ?>">
     <input type="hidden" name="operacion" value="eliminar">
     <button type="submit" onclick="return confirm('¿Seguro que querés eliminar este rol?')">Eliminar</button>

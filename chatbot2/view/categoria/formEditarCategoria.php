@@ -6,7 +6,7 @@ if (isset($_GET['id'])) {
 ?>
 
 <h2>Editar Categoría</h2>
-<form name="formEditarCategoria" action="../controller/categoria.controller.php" method="POST">
+<form name="formEditarCategoria" action="../../controller/categoria.controller.php" method="POST">
     <input type="hidden" name="operacion" value="actualizar">
     <label>Id de la Categoría:</label>
     <input type="text" name="id" value="<?= $categoria['id']; ?>" readonly/>

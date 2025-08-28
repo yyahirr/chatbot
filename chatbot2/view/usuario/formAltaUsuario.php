@@ -1,5 +1,5 @@
     <h2>Alta de Usuario</h2>
-    <form action="../controller/usuario.controller.php" method="POST">
+    <form action="../../controller/usuario.controller.php" method="POST">
         <input type="hidden" name="operacion" value="guardar">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required><br><br>

@@ -1,5 +1,5 @@
 <?php
-include "../model/usuario.class.php";
+include "../../model/usuario.class.php";
 
 if (isset($_GET['id'])) {
     $usuario = Usuario::obtenerPorId($_GET['id']); 
@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
 ?>
 
 <h2>Editar Usuario</h2>
-<form name="formEditarUsuario" action="../controller/usuario.controller.php" method="POST">
+<form name="formEditarUsuario" action="../../controller/usuario.controller.php" method="POST">
     <input type="hidden" name="operacion" value="actualizar">
     <label>Id del Usuario:</label>
     <input type="text" name="id" value="<?= htmlspecialchars($usuario['id']) ?>" readonly /><br><br>

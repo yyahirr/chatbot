@@ -15,7 +15,6 @@ if ($operacion == "guardar") {
     $result = $categoria->eliminar($_POST['id']);
 }
 
-
 if ($result) {
     print "<br>Operación realizada con éxito.</b><br>";
 } else {

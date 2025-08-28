@@ -1,5 +1,5 @@
 <h1>Alta de Respuesta</h2>
-<form action="../controller/respuesta.controller.php" method="POST">
+<form action="../../controller/respuesta.controller.php" method="POST">
     <input type="hidden" name="operacion" value="guardar">
     <label for="respuesta">Respuesta:</label>
     <input type="text" id="respuesta" name="respuesta" required><br><br>

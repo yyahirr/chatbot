@@ -1,5 +1,5 @@
 <?php
-require_once("../model/pregunta.class.php");
+require_once("../../model/pregunta.class.php");
 $preguntas = Preguntas::obtenerTodas();
 ?>
 
@@ -23,7 +23,7 @@ $preguntas = Preguntas::obtenerTodas();
 
         <a href="formEditarPregunta.php?id=<?= $pregunta['id'] ?>">Editar</a>
 
-        <form action="../controller/pregunta.controller.php" method="POST" style="display:inline;">
+        <form action="../../controller/pregunta.controller.php" method="POST" style="display:inline;">
             <input type="hidden" name="id" value="<?= $pregunta['id'] ?>">
             <input type="hidden" name="operacion" value="eliminar">
             <button type="submit" onclick="return confirm('¿Seguro que querés eliminar esta pregunta?')">Eliminar</button>

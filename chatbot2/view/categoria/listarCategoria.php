@@ -1,5 +1,5 @@
 <?php
-require_once("../model/categoria.class.php");
+require_once("../../model/categoria.class.php");
 $categorias = Categoria::obtenerTodas();
 ?>
 
@@ -22,7 +22,7 @@ $categorias = Categoria::obtenerTodas();
         <a href="formEditarCategoria.php?id=<?= $categoria['id'] ?>">Editar</a>
 
         <!-- Botón de Eliminar con formulario POST -->
-        <form action="../controller/categoria.controller.php" method="POST" style="display:inline;">
+        <form action="../../controller/categoria.controller.php" method="POST" style="display:inline;">
             <input type="hidden" name="id" value="<?= $categoria['id'] ?>">
             <input type="hidden" name="operacion" value="eliminar">
             <button type="submit" onclick="return confirm('¿Seguro que querés eliminar esta categoría?')">Eliminar</button>

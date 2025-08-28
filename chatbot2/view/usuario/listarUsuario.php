@@ -1,5 +1,5 @@
 <?php
-require_once("../model/usuario.class.php");
+require_once("../../model/usuario.class.php");
 $usuarios = Usuario::obtenerTodas();
 ?>
 
@@ -24,7 +24,7 @@ $usuarios = Usuario::obtenerTodas();
     <a href="formEditarUsuario.php?id=<?= $usuario['id'] ?>">Editar</a>
 
     <!-- Botón de Eliminar con formulario POST -->
-    <form action="../controller/usuario.controller.php" method="POST" style="display:inline;">
+    <form action="../../controller/usuario.controller.php" method="POST" style="display:inline;">
         <input type="hidden" name="operacion" value="eliminar">
         <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
         <button type="submit" onclick="return confirm('¿Seguro que querés eliminar este usuario?')">Eliminar</button>

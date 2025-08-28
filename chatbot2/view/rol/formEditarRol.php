@@ -1,12 +1,12 @@
 <?php
-include "../model/rol.class.php";
+include "../../model/rol.class.php";
 if (isset($_GET['id'])) {
     $rol = Rol::obtenerPorId($_GET['id']);
     if ($rol) {
 ?>
 
 <h2>Editar Rol</h2>
-<form name="formEditarRol" action="../controller/rol.controller.php" method="POST">
+<form name="formEditarRol" action="../../controller/rol.controller.php" method="POST">
     <input type="hidden" name="operacion" value="actualizar">
     <label> Id del Rol: </label>
     <input type="text" name="id" value="<?= htmlspecialchars($rol->getId()); ?>" readonly/>
@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
 </form>
 
 <?php
-    echo "<a href='./listarRol.php'>Volver</a>";
+    echo "<a href='listarRol.php'>Volver</a>";
     } else {
         print "El rol no existe.";
     }

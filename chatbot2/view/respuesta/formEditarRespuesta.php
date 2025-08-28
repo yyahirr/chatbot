@@ -1,11 +1,11 @@
 <?php
-include "../model/respuesta.class.php";
+include "../../model/respuesta.class.php";
 if (isset($_GET['id'])) {
     $respuesta = Respuesta::obtenerPorId($_GET['id']);
 ?>
 
 <h2>Editar Respuesta</h2>
-<form name="formEditarRespuesta" action="../controller/respuesta.controller.php" method="POST">
+<form name="formEditarRespuesta" action="../../controller/respuesta.controller.php" method="POST">
     <input type="hidden" name="operacion" value="actualizar">
     <label>Id de la Respuesta:</label>
     <input type="text" name="id" value="<?= $respuesta[0]['id']; ?>" readonly/>
@@ -17,7 +17,7 @@ if (isset($_GET['id'])) {
 </form>
 
 <?php
-        echo "<a href='./listarRespuesta.php'>Volver</a>";
+        echo "<a href='listarRespuesta.php'>Volver</a>";
     } else {
         print "El ID ingresado no es válido";
     }
