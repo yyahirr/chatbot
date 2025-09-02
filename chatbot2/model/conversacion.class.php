@@ -1,3 +1,4 @@
+
 <?php
 include_once 'database.class.php';
 
@@ -35,4 +36,5 @@ class Conversaciones {
         $stmt = $this->conexion->prepare($sql);
         return $stmt->execute([$this->pregunta_usuario, $this->respuesta_bot, $this->fecha_hora]);
     }
+
 }

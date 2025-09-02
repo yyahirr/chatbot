@@ -1,38 +1,33 @@
 <?php
 include_once 'database.class.php';
-// usamos el metodo sin crear el objeto
-$roles = Rol::ObtenerTodas();
+
 
 class Rol {
-    private $id;
-    private $nombre;
-    private $conexion;
+    private int $id;
+    private string $nombre;
+    private Database $conexion;
 
-    public function __construct($id=null, $nombre=null) {
+    public function __construct(int $id=null, string $nombre=null) {
         $this->id = $id; // inicializar el id
         $this->nombre = $nombre; // inicializar el nombre
-        $this->conexion = Database::getConnection(); // obtener la conexión a la base de datos
+        $this->conexion = Database::getInstance()->getConnection(); // obtener la conexión a la base de datos
     }
     //en las funciones no estaticas se debe de usar $this->conexion
     // en las funciones estaticas se debe de usar Database::getConnection()
 
     public static function obtenerTodas() {
         $sql = "SELECT * FROM roles";
-        $stmt = Database::getConnection()->prepare($sql);
+        $stmt = Database::getInstance()->getConnection()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     }
 
-    public static function obtenerPorId($id) {
+    public static function obtenerPorId(int $id) {
         $sql = "SELECT * FROM roles WHERE id = ?";
-        $stmt = Database::getConnection()->prepare($sql);
+        $conexion = Database::getInstance()->getConnection()->prepare($sql);
         $stmt->execute([$id]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($row) {
-            return new Rol($row['id'], $row['nombre']);
-        }
-            return null;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function guardar() { 

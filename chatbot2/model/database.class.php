@@ -1,10 +1,9 @@
 <?php
-
 class Database {
-    private $nombre = "chatbot_2";
-    private $servidor = "localhost";
-    private $usuario = "root";
-    private $clave = "";
+    private string $nombre = "chatbot_2";
+    private string $servidor = "localhost";
+    private string $usuario = "root";
+    private string $clave = "";
     private $conexion;
     private static $instancia = null;
 
