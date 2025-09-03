@@ -20,5 +20,5 @@ if ($result) {
 } else {
     print "<br>Error al realizar la operación.</b><br>";
 }
-print "<a href='../formularios/listarCategoria.php'>Volver a la lista de categorías</a>";
+print "<a href='../view/categoria/listarCategoria.php'>Volver a la lista de categorías</a>";
 ?>

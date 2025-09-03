@@ -20,6 +20,6 @@ if ($result) {
 } else {
     print "<br>Error al realizar la operación.</b><br>";
 }
-print "<a href= '../formularios/listarRol.php'>Volver a la lista de roles</a>";
+print "<a href= '../view/rol/listarRol.php'>Volver a la lista de roles</a>";
 
 ?>

@@ -2,8 +2,8 @@
 class Database {
     private string $nombre = "chatbot_2";
     private string $servidor = "localhost";
-    private string $usuario = "root";
-    private string $clave = "";
+    private string $usuario = "admin";
+    private string $clave = "1234";
     private $conexion;
     private static $instancia = null;
 
@@ -18,6 +18,13 @@ class Database {
         }
     }
 
+    public static function getInstance() {
+        if (self::$instancia === null) {
+            self::$instancia = new Database();
+        }
+        return self::$instancia;
+    }
+
     public static function getConnection() {
         if (self::$instancia === null) {
             self::$instancia = new Database();
@@ -25,5 +32,4 @@ class Database {
         return self::$instancia->conexion;
     }
 }
-
 ?>

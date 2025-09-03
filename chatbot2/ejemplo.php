@@ -28,7 +28,7 @@ class Usuario {
         $stmt->execute([$id]);
 
    $resultado = $stmt->fetch(PDO::FETCH_ASSOC)     
-if ( $resultado ) {
+    if ( $resultado ) {
             $rol = Rol::obtenerPorId((int)$resultado['rol_id']);
             return new Usuario(
                 (int)$resultado['id'],

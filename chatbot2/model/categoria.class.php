@@ -2,32 +2,17 @@
 include_once 'database.class.php';
 
 class Categoria {
-    private int $id;
-    private string $nombre;
-    private Database $conexion;
+    private ?int $id;
+    private ?string $nombre;
+    private $conexion;
 
     // para las variables estaticas se usa Database::getConnection()
     // para las variables no estaticas se usa $this->conexion
 
-    public function __construct(int $id = null, string $nombre = null) {
+    public function __construct(?int $id = null, ?string $nombre = null) {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->conexion = Database::getInstance()->getConnection();
-    }
-
-    public static function obtenerTodas() {
-        $sql = "SELECT * FROM categoria";
-        $conexion = Database::getInstance()->getConnection()->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-
-    public static function obtenerPorId(int $id) {
-        $sql = "SELECT * FROM categoria WHERE id = ?";
-        $conexion = Database::getInstance()->getConnection()->prepare($sql);
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function guardar() {
@@ -42,11 +27,28 @@ class Categoria {
         return $stmt->execute([$this->nombre, $this->id]);
     }
 
-    public function eliminar() {
+    public function eliminar(?int $id) {
         $sql = "DELETE FROM categoria WHERE id = ?";
         $stmt = $this->conexion->prepare($sql);
         return $stmt->execute([$this->id]);
     }
+
+    public static function obtenerTodas() {
+        $sql = "SELECT * FROM categoria";
+        $stmt = Database::getInstance()->getConnection()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function obtenerPorId(?int $id) {
+        $sql = "SELECT * FROM categoria WHERE id = ?";
+        $stmt = Database::getInstance()->getConnection()->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+
+    // GETTERS & SETTERS
 
     public function getNombre() {
         return $this->nombre;

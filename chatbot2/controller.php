@@ -5,7 +5,6 @@ if (isset($_POST['text'])) {
     $preguntaUsuario = trim($_POST['text']);
     $conexion = Database::getConnection();
 
-    // Buscar pregunta exacta (puedes usar LIKE para mayor flexibilidad)
     $sql = "SELECT r.respuesta 
             FROM preguntas p 
             JOIN respuesta r ON p.id = r.pregunta_id 
