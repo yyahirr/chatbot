@@ -78,6 +78,3 @@ class Respuesta {
         $this->respuesta = $respuesta;
     }
 }
-
-
-

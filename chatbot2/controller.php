@@ -1,5 +1,6 @@
 <?php
 include_once 'model/database.class.php';
+include_once 'model/conversacion.class.php'; // Incluís la clase para guardar
 
 if (isset($_POST['text'])) {
     $preguntaUsuario = trim($_POST['text']);
@@ -14,10 +15,17 @@ if (isset($_POST['text'])) {
     $stmt->execute([$preguntaUsuario]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    $respuestaBot = "No puedo responder a esa pregunta.";
     if ($row && !empty($row['respuesta'])) {
-        echo $row['respuesta'];
-    } else {
-        echo "No puedo responder a esa pregunta.";
+        $respuestaBot = $row['respuesta'];
     }
+
+    // Guardar conversación en la base de datos
+    $fechaHora = date('Y-m-d H:i:s');
+    $conversacion = new Conversaciones(null, $preguntaUsuario, $respuestaBot, $fechaHora);
+    $conversacion->guardar();
+
+    // Devolver respuesta al frontend
+    echo $respuestaBot;
 }
 ?>

@@ -6,7 +6,7 @@
 }
 
 body {
-    background-image: url(https://i.imgur.com/G8jtY0P.png);
+    background-image: url("https://i.imgur.com/lnE9q9h.png");
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100vh;
@@ -22,7 +22,7 @@ body {
 }
 
 body {
-    background-image: url(https://i.imgur.com/G8jtY0P.png);
+    background-image: url("https://i.imgur.com/lnE9q9h.png");
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100vh;
@@ -116,7 +116,7 @@ nav a:hover, nav span {
 .icon {
     width: 40px;
     height: 40px;
-    background-image: url("https://i.imgur.com/9qY1EMo.png");
+    background-image: url("https://i.imgur.com/JstzkLs.png");
     background-size: cover;
     border-radius: 50%;
     display: flex;
