@@ -32,6 +32,11 @@
             <a class="menu-link" href="view/rol/formAltaRol.php">Añadir rol</a>
             <a class="menu-link" href="view/rol/listarRol.php">Listar roles</a>
         </article>
+        <article class="menu-section">
+            <h3 class="menu-subtitle">Categorías</h3>
+            <a class="menu-link" href="view/categoria/listarCategoria.php">Listar categorías</a>
+            <a class="menu-link" href="view/categoria/formAltaCategoria.php">Añadir categoría</a>
+        </article>
     </main>
     <footer>
         <a class="chatbotVolver"href="index.php" class="menu-back">Volver al Chatbot</a>

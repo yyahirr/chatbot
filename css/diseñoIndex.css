@@ -208,3 +208,18 @@ header svg {
     color: #9dff00; /* color al pasar el mouse (ajusta a tu preferencia) */
     transform: scale(1.05);
 }
+
+#mic-btn {
+    background: #ffb300;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-right: 8px;
+    font-size: 18px;
+    color: white;
+}
+
+#mic-btn.listening {
+    background: red !important;
+}
