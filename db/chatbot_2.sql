@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-07-2025 a las 23:59:40
+-- Tiempo de generación: 02-12-2025 a las 22:43:12
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -41,7 +41,8 @@ INSERT INTO `categoria` (`id`, `nombre`) VALUES
 (2, 'Conectividad'),
 (3, 'Hardware'),
 (4, 'Software'),
-(5, 'Seguridad');
+(5, 'Seguridad'),
+(8, 'estudiantes');
 
 -- --------------------------------------------------------
 
@@ -55,6 +56,14 @@ CREATE TABLE `conversaciones` (
   `respuesta_bot` varchar(500) NOT NULL,
   `fecha_hora` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `conversaciones`
+--
+
+INSERT INTO `conversaciones` (`id`, `pregunta_usuario`, `respuesta_bot`, `fecha_hora`) VALUES
+(1, '¿Cuál es la función principal de un sistema operatativo', 'No puedo responder a esa pregunta.', '2025-12-02 21:58:23'),
+(2, '¿Cuál es la función principal de un sistema operativo?', 'Administrar los recursos del hardware y permitir que el usuario interactúe con la computadora.', '2025-12-02 21:58:33');
 
 -- --------------------------------------------------------
 
@@ -77,7 +86,8 @@ INSERT INTO `preguntas` (`id`, `pregunta`, `categoria_id`) VALUES
 (2, '¿Qué dispositivo se utiliza para conectar varias computadoras en una red local?', 2),
 (3, '¿Qué componente se encarga de procesar la información en una computadora?', 3),
 (4, '¿Qué tipo de software es Microsoft Word?', 4),
-(5, '¿Qué es un antivirus?', 5);
+(5, '¿Qué es un antivirus?', 5),
+(6, 'que nota me saque el tercer trimestre', 8);
 
 -- --------------------------------------------------------
 
@@ -113,6 +123,15 @@ CREATE TABLE `roles` (
   `nombre` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id`, `nombre`) VALUES
+(1, 'admin'),
+(2, 'usuario'),
+(3, 'jose');
+
 -- --------------------------------------------------------
 
 --
@@ -126,6 +145,15 @@ CREATE TABLE `usuarios` (
   `password` varchar(200) NOT NULL,
   `rol_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `email`, `password`, `rol_id`) VALUES
+(1, 'Admin', 'admin@chatbot.com', 'admin123', 1),
+(2, 'Usuario', 'usuario@chatbot.com', 'usuario123', 2),
+(3, 'jose', 'jose@gmail.com', 'josegabriel', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -178,19 +206,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `conversaciones`
 --
 ALTER TABLE `conversaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
@@ -202,13 +230,13 @@ ALTER TABLE `respuesta`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
