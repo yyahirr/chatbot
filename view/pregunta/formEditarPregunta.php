@@ -1,24 +1,53 @@
 <?php
 include "../../model/pregunta.class.php";
+
 if (isset($_GET['id'])) {
     $pregunta = Preguntas::obtenerPorId($_GET['id']);
+    if ($pregunta) {
 ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Pregunta</title>
+    <!-- Enlace al CSS global -->
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <section class="container">
+        <h2 class="title">Editar Pregunta</h2>
+        <form name="formEditarPregunta" action="../../controller/pregunta.controller.php" method="POST">
+            <input type="hidden" name="operacion" value="actualizar">
 
-<h2>Editar Pregunta</h2>
-<form name="formEditarPregunta" action="../../controller/pregunta.controller.php" method="POST">
-    <input type="hidden" name="operacion" value="actualizar">
-    <label>Id de la Pregunta:</label>
-    <input type="text" name="id" value="<?= $pregunta['id']; ?>" readonly /><br><br>
-    <label>Pregunta:</label>
-    <input type="text" name="pregunta" value="<?= $pregunta['pregunta']; ?>" required /><br><br>
-    <label>Categoría ID:</label>
-    <input type="number" name="categoria_id" value="<?= $pregunta['categoria_id']; ?>" required /><br><br>
-    <input type="submit" value="Aceptar" />
-</form>
+            <div class="form-group">
+                <label for="id">Id de la Pregunta:</label>
+                <input type="text" id="id" name="id" value="<?= htmlspecialchars($pregunta['id']); ?>" readonly/>
+            </div>
 
+            <div class="form-group">
+                <label for="pregunta">Pregunta:</label>
+                <input type="text" id="pregunta" name="pregunta" value="<?= htmlspecialchars($pregunta['pregunta']); ?>" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria_id">Categoría ID:</label>
+                <input type="number" id="categoria_id" name="categoria_id" value="<?= htmlspecialchars($pregunta['categoria_id']); ?>" required/>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Aceptar</button>
+        </form>
+
+        <div class="actions">
+            <a href="listarPregunta.php" class="btn btn-success">Volver</a>
+        </div>
+    </section>
+</body>
+</html>
 <?php
-    echo "<a href='listarPregunta.php'>Volver</a>";
+    } else {
+        print "El ID ingresado no es válido";
+    }
 } else {
-    print "El ID ingresado no es válido";
+    print "No se recibió un ID";
 }
 ?>

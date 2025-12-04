@@ -1,68 +1,112 @@
 <?php
 include_once 'database.class.php';
 
-class Conversaciones {
+class Conversacion {
     private ?int $id;
-    private ?string $pregunta_usuario;
-    private ?string $respuesta_bot;
-    private ?string $fecha_hora;
+    private ?string $preguntaUsuario;
+    private ?string $respuestaBot;
+    private ?string $fechaHora;
     private $conexion;
 
-    public function __construct(?int $id = null, ?string $pregunta_usuario = null, ?string $respuesta_bot = null, ?string $fecha_hora = null) {
+    public function __construct(?int $id = null, ?string $preguntaUsuario = null, ?string $respuestaBot = null, ?string $fechaHora = null) {
         $this->id = $id;
-        $this->pregunta_usuario = $pregunta_usuario;
-        $this->respuesta_bot = $respuesta_bot;
-        $this->fecha_hora = $fecha_hora;
-        $this->conexion = Database::GetInstance()->GetConnection();
+        $this->preguntaUsuario = $preguntaUsuario;
+        $this->respuestaBot = $respuestaBot;
+        $this->fechaHora = $fechaHora;
+        $this->conexion = Database::getInstance()->getConnection();
     }
+
+    // -------------------
+    // MÉTODOS CRUD
+    // -------------------
 
     public function guardar() {
-        $sql="INSERT INTO conversaciones (pregunta_usuario, respuesta_bot, fecha_hora) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO conversaciones (pregunta_usuario, respuesta_bot, fecha_hora) VALUES (?, ?, ?)";
         $stmt = $this->conexion->prepare($sql);
-        return $stmt->execute([$this->pregunta_usuario, $this->respuesta_bot, $this->fecha_hora]);
+        return $stmt->execute([$this->preguntaUsuario, $this->respuestaBot, $this->fechaHora]);
     }
 
+    public function actualizar() {
+        $sql = "UPDATE conversaciones SET pregunta_usuario = ?, respuesta_bot = ?, fecha_hora = ? WHERE id = ?";
+        $stmt = $this->conexion->prepare($sql);
+        return $stmt->execute([$this->preguntaUsuario, $this->respuestaBot, $this->fechaHora, $this->id]);
+    }
+
+    public function eliminar() {
+        $sql = "DELETE FROM conversaciones WHERE id = ?";
+        $stmt = $this->conexion->prepare($sql);
+        return $stmt->execute([$this->id]);
+    }
+
+    // -------------------
+    // MÉTODOS ESTÁTICOS
+    // -------------------
 
     public static function obtenerTodas() {
-        $sql = "SELECT * from conversaciones";
-        $stmt = Database::GetInstance()->GetConnection()->prepare($sql);
+        $sql = "SELECT * FROM conversaciones";
+        $stmt = Database::getInstance()->getConnection()->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $conversaciones = [];
+        while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $conversaciones[] = new Conversacion(
+                (int)$fila['id'],
+                $fila['pregunta_usuario'],
+                $fila['respuesta_bot'],
+                $fila['fecha_hora']
+            );
+        }
+        return $conversaciones;
     }
+
     public static function obtenerPorId(?int $id) {
         $sql = "SELECT * FROM conversaciones WHERE id = ?";
-        $stmt = Database::GetInstance()->GetConnection()->prepare($sql);
+        $stmt = Database::getInstance()->getConnection()->prepare($sql);
         $stmt->execute([$id]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($resultado) {
+            return new Conversacion(
+                (int)$resultado['id'],
+                $resultado['pregunta_usuario'],
+                $resultado['respuesta_bot'],
+                $resultado['fecha_hora']
+            );
+        }
+        return null;
     }
 
+    // -------------------
+    // GETTERS & SETTERS
+    // -------------------
 
-    //GETTERS & SETTERS
-
-    public function getId(){
+    public function getId(): ?int {
         return $this->id;
     }
-    public function getPreguntaUsuario(){
-        return $this->pregunta_usuario;
-    }
-    public function getRespuestaBot(){
-        return $this->respuesta_bot;
-    }
-    public function getFechaHora(){
-        return $this->fecha_hora;
+
+    public function getPreguntaUsuario(): ?string {
+        return $this->preguntaUsuario;
     }
 
-    public function setId(?int $id){
-        $this->id = $id;
-    }
-    public function setPreguntaUsuario(?string $pregunta_usuario){
-        $this->id = $id;
-    }
-    public function setRespuestaBot(?string $respuesta_bot){
-        $this->id = $id;
-    }
-    public function setFechaHora(?string $fecha_hora){
-        $this->fecha_hora = $fecha_hora;
+    public function getRespuestaBot(): ?string {
+        return $this->respuestaBot;
     }
 
+    public function getFechaHora(): ?string {
+        return $this->fechaHora;
+    }
+
+    public function setId(?int $id) {
+        $this->id = $id;
+    }
+
+    public function setPreguntaUsuario(?string $preguntaUsuario) {
+        $this->preguntaUsuario = $preguntaUsuario;
+    }
+
+    public function setRespuestaBot(?string $respuestaBot) {
+        $this->respuestaBot = $respuestaBot;
+    }
+
+    public function setFechaHora(?string $fechaHora) {
+        $this->fechaHora = $fechaHora;
+    }
 }

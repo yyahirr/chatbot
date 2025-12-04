@@ -1,19 +1,39 @@
-    <h2>Alta de Usuario</h2>
-    <form action="../../controller/usuario.controller.php" method="POST">
-        <input type="hidden" name="operacion" value="guardar">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required><br><br>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Alta de Usuario</title>
+    <!-- Enlace al CSS global -->
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <section class="container">
+        <h2 class="title">Alta de Usuario</h2>
+        <form action="../../controller/usuario.controller.php" method="POST">
+            <input type="hidden" name="operacion" value="guardar">
 
-        <label for="email">Correo electrónico:</label>
-        <input type="email" id="email" name="email" required><br><br>
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan Pérez"/>
+            </div>
 
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" id="contrasena" name="contrasena" required><br><br>
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" required placeholder="tu@ejemplo.com"/>
+            </div>
 
-        <!-- Si quieres permitir elegir el rol, descomenta lo siguiente:
-        <label for="rol_id">Rol:</label>
-        <input type="number" id="rol_id" name="rol_id"><br><br>
-        -->
+            <div class="form-group">
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" required placeholder="********"/>
+            </div>
 
-        <button type="submit">Guardar Usuario</button>
-    </form>
+            <div class="form-group">
+                <label for="rol_id">Rol ID:</label>
+                <input type="number" id="rol_id" name="rol_id" required placeholder="Ej: 1"/>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+        </form>
+    </section>
+</body>
+</html>

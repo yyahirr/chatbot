@@ -1,25 +1,29 @@
 <?php
-include ("../model/respuesta.class.php");
+require_once("../model/respuesta.class.php");
+require_once("../model/pregunta.class.php");
 
-$operacion = isset($_POST['operacion']) ? $_POST['operacion'] : null;
+$operacion = $_POST['operacion'] ?? null;
 $result = null;
 
 if ($operacion == "guardar") {
-    $respuesta = new Respuesta(null, $_POST['respuesta'], $_POST['pregunta_id']);
+    $pregunta = Pregunta::obtenerPorId($_POST['pregunta_id']);
+    $respuesta = new Respuesta(null, $_POST['respuesta'], $pregunta);
     $result = $respuesta->guardar();
-} else if ($operacion == "actualizar") {
-    $respuesta = new Respuesta($_POST['id'], $_POST['respuesta'], $_POST['pregunta_id']);
+
+} elseif ($operacion == "actualizar") {
+    $pregunta = Pregunta::obtenerPorId($_POST['pregunta_id']);
+    $respuesta = new Respuesta($_POST['id'], $_POST['respuesta'], $pregunta);
     $result = $respuesta->actualizar();
-} else if ($operacion == "eliminar") {
+
+} elseif ($operacion == "eliminar") {
     $respuesta = new Respuesta($_POST['id'], null, null);
-    $result = $respuesta->eliminar($_POST['id']);
+    $result = $respuesta->eliminar();
 }
 
 if ($result) {
-    print "<br>Operación realizada con éxito.</b><br>";
+    echo "<br>Operación realizada con éxito.</b><br>";
 } else {
-    print "<br>Error al realizar la operación.</b><br>";
+    echo "<br>Error al realizar la operación.</b><br>";
 }
-print "<a href='../view/respuesta/listarRespuesta.php'>Volver a la lista de respuestas</a>";
-
+echo "<a href='../view/respuesta/listarRespuesta.php'>Volver a la lista de respuestas</a>";
 ?>

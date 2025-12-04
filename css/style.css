@@ -1,0 +1,104 @@
+:root {
+  --color-primary: #112736;
+  --color-secondary: #2d3e50;
+  --color-accent: #0078d7;
+  --color-success: #28a745;
+  --color-warning: #ffb300;
+  --color-danger: #dc3545;
+  --color-light: #f5f7fa;
+  --color-dark: #222;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 720px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(44,62,80,0.08);
+  padding: 24px;
+}
+
+/* Título de sección */
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 6px;
+}
+
+/* Grupo de formulario */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+label {
+  font-weight: 600;
+  color: #444;
+}
+
+input, select {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #f9fafb;
+  transition: border 0.2s, background 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: var(--color-secondary);
+  background: #fff;
+  outline: none;
+}
+
+/* Botones */
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: #fff;
+}
+
+.btn-success {
+  background-color: var(--color-success);
+  color: #fff;
+}
+
+/* Grupo de acciones (botones juntos) */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}

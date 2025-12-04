@@ -4,7 +4,8 @@ include_once 'model/conversacion.class.php';
 
 if (isset($_POST['text'])) {
     $preguntaUsuario = trim($_POST['text']);
-    $conexion = Database::getConnection();
+    $conexion = Database::getInstance()->getConnection();
+
 
     $sql = "SELECT r.respuesta 
             FROM preguntas p 
@@ -21,7 +22,7 @@ if (isset($_POST['text'])) {
     }
 
     $fechaHora = date('Y-m-d H:i:s');
-    $conversacion = new Conversaciones(null, $preguntaUsuario, $respuestaBot, $fechaHora);
+    $conversacion = new Conversacion(null, $preguntaUsuario, $respuestaBot, $fechaHora);
     $conversacion->guardar();
 
     echo $respuestaBot;

@@ -4,77 +4,100 @@ include_once 'pregunta.class.php';
 
 class Respuesta {
     private ?int $id;
-    private ?string $respuesta;
-    private $pregunta_id;
+    private ?string $texto;
+    private ?Pregunta $pregunta;
     private $conexion;
 
-    public function __construct(?int $id = null, ?string $respuesta = null, $pregunta_id = null) {
+    public function __construct(?int $id = null, ?string $texto = null, ?Pregunta $pregunta = null) {
         $this->id = $id;
-        $this->respuesta = $respuesta;
-        $this->pregunta_id = $pregunta_id;
+        $this->texto = $texto;
+        $this->pregunta = $pregunta;
         $this->conexion = Database::getInstance()->getConnection();
     }
+
+    // -------------------
+    // MÉTODOS CRUD
+    // -------------------
+
     public function guardar() {
         $sql = "INSERT INTO respuesta (respuesta, pregunta_id) VALUES (?, ?)";
         $stmt = $this->conexion->prepare($sql);
-        return $stmt->execute([$this->respuesta, $this->pregunta_id]);
+        $preguntaId = ($this->pregunta instanceof Pregunta) ? $this->pregunta->getId() : $this->pregunta;
+        return $stmt->execute([$this->texto, $preguntaId]);
     }
 
     public function actualizar() {
         $sql = "UPDATE respuesta SET respuesta = ?, pregunta_id = ? WHERE id = ?";
         $stmt = $this->conexion->prepare($sql);
-        return $stmt->execute([$this->respuesta, $this->pregunta_id, $this->id]);
+        $preguntaId = ($this->pregunta instanceof Pregunta) ? $this->pregunta->getId() : $this->pregunta;
+        return $stmt->execute([$this->texto, $preguntaId, $this->id]);
     }
 
-    public function eliminar(?int $id) {
+    public function eliminar() {
         $sql = "DELETE FROM respuesta WHERE id = ?";
         $stmt = $this->conexion->prepare($sql);
-        return $stmt->execute([$id]);
+        return $stmt->execute([$this->id]);
     }
 
+    // -------------------
+    // MÉTODOS ESTÁTICOS
+    // -------------------
 
     public static function obtenerTodas() {
-        $sql = "SELECT * from respuesta";
+        $sql = "SELECT * FROM respuesta";
         $stmt = Database::getInstance()->getConnection()->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $respuestas = [];
+        while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $pregunta = null;
+            if (!empty($fila['pregunta_id'])) {
+                $pregunta = Pregunta::obtenerPorId((int)$fila['pregunta_id']);
+            }
+            $respuestas[] = new Respuesta((int)$fila['id'], $fila['respuesta'], $pregunta);
+        }
+        return $respuestas;
     }
+
     public static function obtenerPorId(?int $id) {
         $sql = "SELECT * FROM respuesta WHERE id = ?";
         $stmt = Database::getInstance()->getConnection()->prepare($sql);
         $stmt->execute([$id]);
-        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($resultado){
-            return new Respuesta((int)$resultado[0]['id'], $resultado[0]['respuesta']);
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($resultado) {
+            $pregunta = null;
+            if (!empty($resultado['pregunta_id'])) {
+                $pregunta = Pregunta::obtenerPorId((int)$resultado['pregunta_id']);
+            }
+            return new Respuesta((int)$resultado['id'], $resultado['respuesta'], $pregunta);
         }
         return null;
     }
 
+    // -------------------
+    // GETTERS & SETTERS
+    // -------------------
 
-    //GETTERS & SETTERS
-
-
-    public function getId() {
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getRespuesta() {
-        return $this->respuesta;
+    public function getTexto(): ?string {
+        return $this->texto;
     }
 
-    public function getPreguntaId() {
-        return $this->pregunta_id;
+    public function getPregunta(): ?Pregunta {
+        return $this->pregunta;
     }
 
     public function setId(?int $id) {
         $this->id = $id;
     }
 
-    public function setPreguntaId(?string $pregunta_id) {
-        $this->pregunta_id = $pregunta_id;
+    public function setTexto(?string $texto) {
+        $this->texto = $texto;
     }
 
-    public function setRespuesta(?string $respuesta) {
-        $this->respuesta = $respuesta;
+    public function setPregunta(?Pregunta $pregunta) {
+        $this->pregunta = $pregunta;
     }
 }

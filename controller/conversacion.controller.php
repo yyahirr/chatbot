@@ -9,7 +9,7 @@ if ($operacion == "guardar") {
     $respuestaBot = isset($_POST['respuesta_bot']) ? $_POST['respuesta_bot'] : null;
     $fechaHora = date('Y-m-d H:i:s');
 
-    $conversacion = new Conversaciones(null, $preguntaUsuario, $respuestaBot, $fechaHora);
+    $conversacion = new Conversacion(null, $preguntaUsuario, $respuestaBot, $fechaHora);
     $result = $conversacion->guardar();
 
 if ($result) {

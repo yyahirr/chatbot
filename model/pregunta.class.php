@@ -2,86 +2,102 @@
 include_once 'database.class.php';
 include_once 'categoria.class.php';
 
-class Preguntas {
+class Pregunta {
     private ?int $id;
-    private ?string $pregunta;
-    private $categoria_id;
+    private ?string $texto;
+    private ?Categoria $categoria;
     private $conexion;
 
-    public function __construct(?int $id = null, ?string $pregunta = null, $categoria_id = null) {
+    public function __construct(?int $id = null, ?string $texto = null, ?Categoria $categoria = null) {
         $this->id = $id;
-        $this->pregunta = $pregunta;
-        $this->categoria_id = $categoria_id;
+        $this->texto = $texto;
+        $this->categoria = $categoria;
         $this->conexion = Database::getInstance()->getConnection();
     }
 
+    // -------------------
+    // MÉTODOS CRUD
+    // -------------------
+
     public function guardar() {
-    $sql = "INSERT INTO preguntas (pregunta, categoria_id) VALUES (?, ?)";
-    $stmt = $this->conexion->prepare($sql);
-    return $stmt->execute([$this->pregunta, $this->categoria_id]);
+        $sql = "INSERT INTO preguntas (pregunta, categoria_id) VALUES (?, ?)";
+        $stmt = $this->conexion->prepare($sql);
+        $categoriaId = ($this->categoria instanceof Categoria) ? $this->categoria->getId() : $this->categoria;
+        return $stmt->execute([$this->texto, $categoriaId]);
     }
 
     public function actualizar() {
-    $sql = "UPDATE preguntas SET pregunta = ?, categoria_id = ? WHERE id = ?";
-    $stmt = $this->conexion->prepare($sql);
-    return $stmt->execute([$this->pregunta, $this->categoria_id, $this->id]);
+        $sql = "UPDATE preguntas SET pregunta = ?, categoria_id = ? WHERE id = ?";
+        $stmt = $this->conexion->prepare($sql);
+        $categoriaId = ($this->categoria instanceof Categoria) ? $this->categoria->getId() : $this->categoria;
+        return $stmt->execute([$this->texto, $categoriaId, $this->id]);
     }
 
-    public function eliminar(?int $id) {
+    public function eliminar() {
         $sql = "DELETE FROM preguntas WHERE id = ?";
         $stmt = $this->conexion->prepare($sql);
         return $stmt->execute([$this->id]);
     }
 
+    // -------------------
+    // MÉTODOS ESTÁTICOS
+    // -------------------
+
     public static function obtenerTodas() {
-    $sql = "SELECT * FROM preguntas";
-    $stmt = Database::getInstance()->getConnection()->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "SELECT * FROM preguntas";
+        $stmt = Database::getInstance()->getConnection()->prepare($sql);
+        $stmt->execute();
+        $preguntas = [];
+        while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $categoria = null;
+            if (!empty($fila['categoria_id'])) {
+                $categoria = Categoria::obtenerPorId((int)$fila['categoria_id']);
+            }
+            $preguntas[] = new Pregunta((int)$fila['id'], $fila['pregunta'], $categoria);
+        }
+        return $preguntas;
     }
 
     public static function obtenerPorId(?int $id) {
         $sql = "SELECT * FROM preguntas WHERE id = ?";
         $stmt = Database::getInstance()->getConnection()->prepare($sql);
         $stmt->execute([$id]);
-        $r = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($r) {
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($resultado) {
             $categoria = null;
-            if (!empty($r['categoria_id'])) {
-                $categoria = Categoria::obtenerPorId((int)$r['categoria_id']);
+            if (!empty($resultado['categoria_id'])) {
+                $categoria = Categoria::obtenerPorId((int)$resultado['categoria_id']);
             }
-            return new Preguntas(
-                (int)$r['id'],
-                $r['pregunta'],
-                $categoria
-            );
+            return new Pregunta((int)$resultado['id'], $resultado['pregunta'], $categoria);
         }
         return null;
     }
 
-    //GETTERS Y SETTERS
+    // -------------------
+    // GETTERS & SETTERS
+    // -------------------
 
-    public function getId(){
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getPregunta(){
-        return $this->pregunta;
+    public function getTexto(): ?string {
+        return $this->texto;
     }
 
-    public function getCategoria(){
-        return $this->categoria_id;
+    public function getCategoria(): ?Categoria {
+        return $this->categoria;
     }
 
-    public function setId(?int $id){
+    public function setId(?int $id) {
         $this->id = $id;
     }
 
-    public function setPregunta(?string $pregunta){
-        $this->pregunta = $pregunta;
+    public function setTexto(?string $texto) {
+        $this->texto = $texto;
     }
 
-    public function setCategoria(?int $categoria_id){
-        $this->categoria_id = $categoria_id;
+    public function setCategoria(?Categoria $categoria) {
+        $this->categoria = $categoria;
     }
 }

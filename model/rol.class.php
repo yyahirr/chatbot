@@ -1,17 +1,21 @@
 <?php
 include_once 'database.class.php';
 
-
 class Rol {
     private ?int $id;
     private ?string $nombre;
     private $conexion;
 
-    public function __construct(?int $id=null, ?string $nombre=null) {
+    public function __construct(?int $id = null, ?string $nombre = null) {
         $this->id = $id;
         $this->nombre = $nombre;
         $this->conexion = Database::getInstance()->getConnection();
     }
+
+    // -------------------
+    // MÉTODOS CRUD
+    // -------------------
+
     public function guardar() { 
         $sql = "INSERT INTO roles (nombre) VALUES (?)";
         $stmt = $this->conexion->prepare($sql);
@@ -19,22 +23,30 @@ class Rol {
     }
 
     public function actualizar() {
-        $sql = "UPDATE roles SET nombre= ? WHERE id = ?";
+        $sql = "UPDATE roles SET nombre = ? WHERE id = ?";
         $stmt = $this->conexion->prepare($sql);
         return $stmt->execute([$this->nombre, $this->id]);
     }
 
-    public function eliminar(?int $id) {
+    public function eliminar() {
         $sql = "DELETE FROM roles WHERE id = ?";
         $stmt = $this->conexion->prepare($sql);
         return $stmt->execute([$this->id]);
     }
-    
+
+    // -------------------
+    // MÉTODOS ESTÁTICOS
+    // -------------------
+
     public static function obtenerTodas() {
         $sql = "SELECT * FROM roles";
         $stmt = Database::getInstance()->getConnection()->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $roles = [];
+        while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $roles[] = new Rol((int)$fila['id'], $fila['nombre']);
+        }
+        return $roles;
     }
 
     public static function obtenerPorId(?int $id) {
@@ -48,22 +60,23 @@ class Rol {
         return null;
     }
 
+    // -------------------
+    // GETTERS & SETTERS
+    // -------------------
 
-    //GETTERS & SETTERS
-
-    public function getId() {
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getNombre(){
+    public function getNombre(): ?string {
         return $this->nombre;
     }
 
-    public function setId($id) {
+    public function setId(?int $id) {
         $this->id = $id;
     }
-    public function setNombre($nombre) {
+
+    public function setNombre(?string $nombre) {
         $this->nombre = $nombre;
     }
 }
-?>
