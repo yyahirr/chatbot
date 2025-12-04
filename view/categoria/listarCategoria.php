@@ -7,10 +7,8 @@ $conversaciones = Conversacion::obtenerTodas();
 <head>
     <meta charset="UTF-8">
     <title>Listado de Conversaciones</title>
-    <!-- Enlace al CSS global -->
     <link rel="stylesheet" href="../../css/style.css">
     <style>
-        /* Estilos específicos para tablas */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -19,22 +17,18 @@ $conversaciones = Conversacion::obtenerTodas();
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-
         th, td {
             padding: 12px 15px;
             text-align: left;
         }
-
         th {
             background-color: var(--color-primary);
             color: #fff;
             font-weight: 600;
         }
-
         tr:nth-child(even) {
             background-color: #f9fafb;
         }
-
         tr:hover {
             background-color: #eef2f7;
         }
@@ -53,10 +47,10 @@ $conversaciones = Conversacion::obtenerTodas();
             </tr>
             <?php foreach ($conversaciones as $conversacion) { ?>
             <tr>
-                <td><?= htmlspecialchars($conversacion['id']) ?></td>
-                <td><?= htmlspecialchars($conversacion['pregunta_usuario']) ?></td>
-                <td><?= htmlspecialchars($conversacion['respuesta_bot']) ?></td>
-                <td><?= htmlspecialchars($conversacion['fecha_hora']) ?></td>
+                <td><?= htmlspecialchars($conversacion->getId()) ?></td>
+                <td><?= htmlspecialchars($conversacion->getPreguntaUsuario()) ?></td>
+                <td><?= htmlspecialchars($conversacion->getRespuestaBot()) ?></td>
+                <td><?= htmlspecialchars($conversacion->getFechaHora()) ?></td>
             </tr>
             <?php } ?>
         </table>

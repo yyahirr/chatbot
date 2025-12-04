@@ -2,7 +2,7 @@
 include "../../model/usuario.class.php";
 
 if (isset($_GET['id'])) {
-    $usuario = Usuario::obtenerPorId($_GET['id']); 
+    $usuario = Usuario::obtenerPorId((int)$_GET['id']); 
     if ($usuario) {
 ?>
 <!DOCTYPE html>
@@ -10,54 +10,97 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <title>Editar Usuario</title>
-    <!-- Enlace al CSS global -->
     <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .container {
+            max-width: 720px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .title {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 25px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: #fff;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .btn-success {
+            background: #28a745;
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .btn-primary:hover, .btn-success:hover {
+            filter: brightness(0.95);
+        }
+    </style>
 </head>
 <body>
     <section class="container">
         <h2 class="title">Editar Usuario</h2>
         <form name="formEditarUsuario" action="../../controller/usuario.controller.php" method="POST">
             <input type="hidden" name="operacion" value="actualizar">
-
-            <div class="form-group">
-                <label for="id">Id del Usuario:</label>
-                <input type="text" id="id" name="id" value="<?= htmlspecialchars($usuario['id']) ?>" readonly/>
-            </div>
+            <input type="hidden" name="id" value="<?= htmlspecialchars($usuario->getId()) ?>" />
 
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($usuario['nombre']) ?>" required/>
+                <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($usuario->getNombre()) ?>" required/>
             </div>
 
             <div class="form-group">
                 <label for="email">Correo electrónico:</label>
-                <input type="email" id="email" name="email" value="<?= htmlspecialchars($usuario['email']) ?>" required/>
+                <input type="email" id="email" name="email" value="<?= htmlspecialchars($usuario->getEmail()) ?>" required/>
             </div>
 
             <div class="form-group">
                 <label for="contrasena">Contraseña:</label>
-                <input type="password" id="contrasena" name="contrasena" value="<?= htmlspecialchars($usuario['password']) ?>" required/>
+                <input type="password" id="contrasena" name="contrasena" value="<?= htmlspecialchars($usuario->getPassword()) ?>" required/>
             </div>
 
             <div class="form-group">
                 <label for="rol_id">Rol ID:</label>
-                <input type="number" id="rol_id" name="rol_id" value="<?= htmlspecialchars($usuario['rol_id']) ?>" required/>
+                <input type="number" id="rol_id" name="rol_id" value="<?= htmlspecialchars($usuario->getRolId()) ?>" required/>
             </div>
 
             <button type="submit" class="btn btn-primary">Aceptar</button>
         </form>
 
-        <div class="actions">
-            <a href="listarUsuario.php" class="btn btn-success">Volver</a>
-        </div>
+        <a href="listarUsuario.php" class="btn btn-success">Volver</a>
     </section>
 </body>
 </html>
 <?php
     } else {
-        print "El usuario no existe.";
+        echo "El usuario no existe. <a href='listarUsuario.php'>Volver</a>";
     }
 } else {
-    print "El ID ingresado no es válido";
+    echo "El ID ingresado no es válido. <a href='listarUsuario.php'>Volver</a>";
 }
 ?>

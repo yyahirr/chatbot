@@ -1,13 +1,16 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once("../../model/rol.class.php");
-$roles = Rol::obtenerTodas(); // método estático, son propios de la clase.
+$roles = Rol::obtenerTodas(); // devuelve objetos Rol
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Listado de Roles</title>
-    <!-- Enlace al CSS global -->
     <link rel="stylesheet" href="../../css/style.css">
     <style>
         table {
@@ -90,17 +93,17 @@ $roles = Rol::obtenerTodas(); // método estático, son propios de la clase.
                 <th>Nombre</th>
                 <th>Acciones</th>
             </tr>
-            <?php foreach ($roles as $rol){ ?>
+            <?php foreach ($roles as $rol) { ?>
             <tr>
-                <td><?= htmlspecialchars($rol['id']) ?></td>
-                <td><?= htmlspecialchars($rol['nombre']) ?></td>
+                <td><?= htmlspecialchars($rol->getId()) ?></td>
+                <td><?= htmlspecialchars($rol->getNombre()) ?></td>
                 <td>
                     <!-- Botón de Editar -->
-                    <a href="formEditarRol.php?id=<?= $rol['id'] ?>" class="btn-edit">Editar</a>
+                    <a href="formEditarRol.php?id=<?= $rol->getId() ?>" class="btn-edit">Editar</a>
 
                     <!-- Botón de Eliminar con formulario POST -->
                     <form action="../../controller/rol.controller.php" method="POST" style="display:inline;">
-                        <input type="hidden" name="id" value="<?= $rol['id'] ?>">
+                        <input type="hidden" name="id" value="<?= $rol->getId() ?>">
                         <input type="hidden" name="operacion" value="eliminar">
                         <button type="submit" class="btn-delete" onclick="return confirm('¿Seguro que querés eliminar este rol?')">Eliminar</button>
                     </form>

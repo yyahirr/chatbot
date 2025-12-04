@@ -34,9 +34,21 @@ class Pregunta {
     }
 
     public function eliminar() {
-        $sql = "DELETE FROM preguntas WHERE id = ?";
-        $stmt = $this->conexion->prepare($sql);
-        return $stmt->execute([$this->id]);
+        try {
+            // 1. Eliminar primero las respuestas asociadas
+            $sqlResp = "DELETE FROM respuesta WHERE pregunta_id = ?";
+            $stmtResp = $this->conexion->prepare($sqlResp);
+            $stmtResp->execute([$this->id]);
+
+            // 2. Luego eliminar la pregunta
+            $sqlPreg = "DELETE FROM preguntas WHERE id = ?";
+            $stmtPreg = $this->conexion->prepare($sqlPreg);
+            return $stmtPreg->execute([$this->id]);
+
+        } catch (PDOException $e) {
+            // Podés loguear el error o devolver false
+            return false;
+        }
     }
 
     // -------------------

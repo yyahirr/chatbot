@@ -11,72 +11,112 @@ $respuestas = Respuesta::obtenerTodas();
 <head>
     <meta charset="UTF-8">
     <title>Listado de Respuestas</title>
-    <!-- Enlace al CSS global -->
     <link rel="stylesheet" href="../../css/style.css">
     <style>
+        :root {
+            --color-primary: #007bff;
+            --color-success: #28a745;
+            --color-danger: #dc3545;
+            --color-accent: #0069d9;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .actions {
+            text-align: right;
+            margin-bottom: 15px;
+        }
+
+        .actions a {
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            background: var(--color-success);
+            color: #fff;
+            font-weight: 500;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .actions a:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 10px;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
+
         th, td {
             padding: 12px 15px;
             text-align: left;
         }
+
         th {
             background-color: var(--color-primary);
             color: #fff;
             font-weight: 600;
         }
+
         tr:nth-child(even) {
             background-color: #f9fafb;
         }
+
         tr:hover {
             background-color: #eef2f7;
         }
-        .actions {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        .actions a {
-            text-decoration: none;
-            padding: 8px 14px;
+
+        .btn-edit, .btn-delete {
+            padding: 6px 12px;
             border-radius: 6px;
-            background: var(--color-accent);
-            color: #fff;
-            transition: background 0.2s, transform 0.2s;
+            font-size: 14px;
+            text-decoration: none;
+            margin-right: 5px;
         }
-        .actions a:hover {
-            background: #005a9e;
-            transform: translateY(-2px);
-        }
+
         .btn-edit {
             background: var(--color-success);
             color: #fff;
-            text-decoration: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            transition: background 0.2s, transform 0.2s;
         }
+
         .btn-edit:hover {
             background: #218838;
-            transform: translateY(-2px);
         }
+
         .btn-delete {
             background: var(--color-danger);
             color: #fff;
             border: none;
-            border-radius: 6px;
-            padding: 6px 12px;
             cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
         }
+
         .btn-delete:hover {
             background: #c82333;
-            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -97,16 +137,17 @@ $respuestas = Respuesta::obtenerTodas();
             </tr>
             <?php foreach ($respuestas as $respuesta) { ?>
             <tr>
-                <td><?= htmlspecialchars($respuesta['id']) ?></td>
-                <td><?= htmlspecialchars($respuesta['respuesta']) ?></td>
-                <td><?= htmlspecialchars($respuesta['pregunta_id']) ?></td>
+                <td><?= htmlspecialchars($respuesta->getId()) ?></td>
+                <td><?= htmlspecialchars($respuesta->getTexto()) ?></td>
                 <td>
-                    <!-- Botón de Editar -->
-                    <a href="formEditarRespuesta.php?id=<?= $respuesta['id'] ?>" class="btn-edit">Editar</a>
-
-                    <!-- Botón de Eliminar con formulario POST -->
+                    <?= $respuesta->getPregunta()
+                        ? htmlspecialchars($respuesta->getPregunta()->getId())
+                        : '<em>Sin pregunta</em>' ?>
+                </td>
+                <td>
+                    <a href="formEditarRespuesta.php?id=<?= $respuesta->getId() ?>" class="btn-edit">Editar</a>
                     <form action="../../controller/respuesta.controller.php" method="POST" style="display:inline;">
-                        <input type="hidden" name="id" value="<?= $respuesta['id'] ?>">
+                        <input type="hidden" name="id" value="<?= $respuesta->getId() ?>">
                         <input type="hidden" name="operacion" value="eliminar">
                         <button type="submit" class="btn-delete" onclick="return confirm('¿Seguro que querés eliminar esta respuesta?')">Eliminar</button>
                     </form>

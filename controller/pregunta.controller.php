@@ -1,6 +1,5 @@
 <?php
-require_once('../model/pregunta.class.php');
-require_once('../model/categoria.class.php');
+include_once('../model/pregunta.class.php');
 
 $operacion = $_POST['operacion'] ?? null;
 $result = null;

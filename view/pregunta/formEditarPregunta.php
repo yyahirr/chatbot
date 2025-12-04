@@ -1,16 +1,17 @@
 <?php
-include "../../model/pregunta.class.php";
+// Usar require_once para evitar duplicados
+require_once "../../model/pregunta.class.php";
 
 if (isset($_GET['id'])) {
-    $pregunta = Preguntas::obtenerPorId($_GET['id']);
+    $pregunta = Pregunta::obtenerPorId((int)$_GET['id']); 
     if ($pregunta) {
+        $categorias = Categoria::obtenerTodas();
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Editar Pregunta</title>
-    <!-- Enlace al CSS global -->
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
@@ -18,20 +19,25 @@ if (isset($_GET['id'])) {
         <h2 class="title">Editar Pregunta</h2>
         <form name="formEditarPregunta" action="../../controller/pregunta.controller.php" method="POST">
             <input type="hidden" name="operacion" value="actualizar">
-
-            <div class="form-group">
-                <label for="id">Id de la Pregunta:</label>
-                <input type="text" id="id" name="id" value="<?= htmlspecialchars($pregunta['id']); ?>" readonly/>
-            </div>
+            <input type="hidden" name="id" value="<?= htmlspecialchars($pregunta->getId()); ?>">
 
             <div class="form-group">
                 <label for="pregunta">Pregunta:</label>
-                <input type="text" id="pregunta" name="pregunta" value="<?= htmlspecialchars($pregunta['pregunta']); ?>" required/>
+                <input type="text" id="pregunta" name="pregunta"
+                       value="<?= htmlspecialchars($pregunta->getTexto()); ?>" required/>
             </div>
 
             <div class="form-group">
-                <label for="categoria_id">Categoría ID:</label>
-                <input type="number" id="categoria_id" name="categoria_id" value="<?= htmlspecialchars($pregunta['categoria_id']); ?>" required/>
+                <label for="categoria_id">Categoría:</label>
+                <select id="categoria_id" name="categoria_id">
+                    <option value="">Sin categoría</option>
+                    <?php foreach ($categorias as $cat): ?>
+                        <option value="<?= htmlspecialchars($cat->getId()); ?>"
+                            <?= ($pregunta->getCategoria() && $pregunta->getCategoria()->getId() === $cat->getId()) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($cat->getNombre()); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary">Aceptar</button>
@@ -45,9 +51,9 @@ if (isset($_GET['id'])) {
 </html>
 <?php
     } else {
-        print "El ID ingresado no es válido";
+        echo "El ID ingresado no es válido <a href='listarPregunta.php'>Volver</a>";
     }
 } else {
-    print "No se recibió un ID";
+    echo "No se recibió un ID <a href='listarPregunta.php'>Volver</a>";
 }
 ?>
